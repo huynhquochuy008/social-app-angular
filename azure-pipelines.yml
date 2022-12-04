@@ -1,0 +1,26 @@
+trigger:
+- huy-test-fe
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'PushToDockerHub'
+        repository: 'huyhuynh008/testfe'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.SourcesDirectory)/front-end/Dockerfile'
+        tags: |
+              $(tag)
