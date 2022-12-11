@@ -23,6 +23,7 @@ stages:
         repository: 'huyhuynh008/testfe'
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/front-end/Dockerfile'
+        tags: "latest"
 
 - stage: Deploy
   displayName: Deploy to aks
