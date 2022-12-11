@@ -4,6 +4,9 @@ trigger:
 resources:
 - repo: self
 
+pool:
+      vmImage: ubuntu-latest
+
 variables:
   tag: '$(Build.BuildId)'
 
@@ -13,8 +16,6 @@ stages:
   jobs:
   - job: Build
     displayName: Build
-    pool:
-      vmImage: ubuntu-latest
     steps:
     - task: Docker@2
       inputs:
@@ -24,3 +25,18 @@ stages:
         Dockerfile: '$(Build.SourcesDirectory)/front-end/Dockerfile'
         tags: |
               $(tag)
+
+- stage: Deploy
+  displayName: Deploy to aks
+  jobs:
+  - job: Deploy
+    displayName: Deploy
+    steps:
+    - task: Kubernetes@1
+      inputs:
+        connectionType: 'Kubernetes Service Connection'
+        kubernetesServiceEndpoint: 'datingapp-default'
+        command: 'rollout'
+        arguments: 'restart deployment/frontend-deployment'
+        secretType: 'dockerRegistry'
+        containerRegistryType: 'Azure Container Registry'
