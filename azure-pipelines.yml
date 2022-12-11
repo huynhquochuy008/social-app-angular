@@ -38,7 +38,8 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: | 
+          echo "$(tag)"
           az aks command invoke \
             --resource-group datingapp \
             --name datingapp-project \
-            --command "kubectl set image deployment/frontend-deployment frontend-container=huyhuynh008/testfe:{$tag} -n ingress-basic"
+            --command "kubectl set image deployment/frontend-deployment frontend-container=huyhuynh008/testfe:($tag) -n ingress-basic"
