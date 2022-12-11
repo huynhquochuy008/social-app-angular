@@ -7,24 +7,22 @@ resources:
 pool:
       vmImage: ubuntu-latest
 
-variables:
-  tag: '$(Build.BuildId)'
+# variables:
+#   tag: '$(Build.BuildId)'
 
 stages:
-# - stage: Build
-#   displayName: Build image
-#   jobs:
-#   - job: Build
-#     displayName: Build
-#     steps:
-#     - task: Docker@2
-#       inputs:
-#         containerRegistry: 'PushToDockerHub'
-#         repository: 'huyhuynh008/testfe'
-#         command: 'buildAndPush'
-#         Dockerfile: '$(Build.SourcesDirectory)/front-end/Dockerfile'
-#         tags: |
-#               $(tag)
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Build
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'PushToDockerHub'
+        repository: 'huyhuynh008/testfe'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.SourcesDirectory)/front-end/Dockerfile'
 
 - stage: Deploy
   displayName: Deploy to aks
@@ -38,8 +36,7 @@ stages:
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: | 
-          echo "$(tag)"
           az aks command invoke \
             --resource-group datingapp \
             --name datingapp-project \
-            --command "kubectl set image deployment/frontend-deployment frontend-container=huyhuynh008/testfe:${tag} -n ingress-basic"
+            --command "kubectl rollout restart deployment/frontend-deployment -n ingress-basic"
