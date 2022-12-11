@@ -32,11 +32,13 @@ stages:
   - job: Deploy
     displayName: Deploy
     steps:
-    - task: Kubernetes@1
+    - task: AzureCLI@2
       inputs:
-        connectionType: 'Kubernetes Service Connection'
-        kubernetesServiceEndpoint: 'datingapp-default'
-        command: 'rollout'
-        arguments: 'restart deployment/frontend-deployment'
-        secretType: 'dockerRegistry'
-        containerRegistryType: 'Azure Container Registry'
+        azureSubscription: 'Azure for Students(e19c3989-41f4-4ca6-906a-5b60f8793d44)'
+        scriptType: 'ps'
+        scriptLocation: 'inlineScript'
+        inlineScript: | 
+          az aks command invoke \
+            --resource-group datingapp \
+            --name datingapp-project \
+            --command "kubectl rollout restart deployment/frontend-deployment"
