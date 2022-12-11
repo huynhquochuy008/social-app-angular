@@ -41,4 +41,4 @@ stages:
           az aks command invoke \
             --resource-group datingapp \
             --name datingapp-project \
-            --command "kubectl rollout restart deployment/frontend-deployment"
+            --command "kubectl rollout restart deployment/frontend-deployment -n ingress-basic"
