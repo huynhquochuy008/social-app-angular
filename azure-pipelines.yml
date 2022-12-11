@@ -35,7 +35,7 @@ stages:
     - task: AzureCLI@2
       inputs:
         azureSubscription: 'Azure for Students(e19c3989-41f4-4ca6-906a-5b60f8793d44)'
-        scriptType: 'ps'
+        scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: | 
           az aks command invoke \
