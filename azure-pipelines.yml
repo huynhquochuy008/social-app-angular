@@ -1,15 +1,9 @@
 trigger:
 - huy-test
-
 resources:
 - repo: self
-
 pool:
       vmImage: ubuntu-latest
-
-# variables:
-#   tag: '$(Build.BuildId)'
-
 stages:
 - stage: Build
   displayName: Build image
@@ -24,7 +18,6 @@ stages:
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: "latest"
-
 - stage: Deploy
   displayName: Deploy to aks
   jobs:
@@ -40,4 +33,4 @@ stages:
           az aks command invoke \
             --resource-group datingapp \
             --name datingapp-project \
-            --command "kubectl rollout restart deployment/backend-deployment -n ingress-basic"
+            --command " kubectl set image deployment/backend-deployment  backend-container=huyhuynh008/testbe:latest -n ingress-basic &&  kubectl rollout restart deployment/backend-deployment -n ingress-basic"
