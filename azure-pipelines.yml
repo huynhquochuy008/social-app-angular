@@ -11,19 +11,19 @@ pool:
 #   tag: '$(Build.BuildId)'
 
 stages:
-# - stage: Build
-#   displayName: Build image
-#   jobs:
-#   - job: Build
-#     displayName: Build
-#     steps:
-#     - task: Docker@2
-#       inputs:
-#         containerRegistry: 'PushToDockerHub'
-#         repository: 'huyhuynh008/testfe'
-#         command: 'buildAndPush'
-#         Dockerfile: '$(Build.SourcesDirectory)/front-end/Dockerfile'
-#         tags: "latest"
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Build
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'PushToDockerHub'
+        repository: 'huyhuynh008/testfe'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.SourcesDirectory)/front-end/Dockerfile'
+        tags: "latest"
 
 - stage: Deploy
   displayName: Deploy to aks
