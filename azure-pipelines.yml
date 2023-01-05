@@ -40,4 +40,4 @@ stages:
           az aks command invoke \
             --resource-group datingapp \
             --name datingapp-project \
-            --command " whoami && cd ~ && ls -a  && kubectl rollout restart deployment/frontend-deployment -n ingress-basic"
+            --command " kubectl set image deployment/frontend-deployment  frontend-container=testfe:latest -n ingress-basic"
