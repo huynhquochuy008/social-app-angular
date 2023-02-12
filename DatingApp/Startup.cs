@@ -154,7 +154,7 @@ namespace DatingApp
             //config static folder to get images
             app.UseStaticFiles(new StaticFileOptions()
             {
-                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"app/Share/Images")), RequestPath = new PathString("/images")
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"app/Share/Images")), RequestPath = new PathString("/app/Share/Images")
             });
         }
     }
