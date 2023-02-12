@@ -3,7 +3,7 @@
     <img
       [src]="
         postUserProfile?.avatar
-          ? 'http://20.244.58.242/images/' + postUserProfile.avatar
+          ? 'http://20.244.58.242/api/images/' + postUserProfile.avatar
           : 'https://media.istockphoto.com/vectors/default-profile-picture-avatar-photo-placeholder-vector-illustration-vector-id1223671392?k=20&m=1223671392&s=612x612&w=0&h=lGpj2vWAI3WUT1JeJWm1PRoHT3V15_1pdcTn2szdwQ0='
       "
       alt="Ungap profile picture"
@@ -24,7 +24,7 @@
   <div class="post-img-box flex-center">
     <img
       *ngIf="post.image"
-      [src]="'http://20.244.58.242/images/' + post.image"
+      [src]="'http://20.244.58.242/api/images/' + post.image"
       alt="Ungap post image"
       class="post-img"
     />
