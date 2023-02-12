@@ -24,6 +24,5 @@ RUN dotnet publish "DatingApp.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-COPY --from=build /src/DatingApp/Share /app/Share
-
+RUN mkdir -p /app/Share/Images
 ENTRYPOINT ["dotnet", "DatingApp.dll"]
