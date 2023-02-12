@@ -33,7 +33,7 @@ namespace DatingApp.Infrastructure.Service
             string nameOfPostPicture = string.Empty;
             if (request.Image != null)
             {
-                var folderSave = Path.Combine("Share", "Images");
+                var folderSave = Path.Combine("/app/Share", "Images");
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderSave);
                 nameOfPostPicture = Guid.NewGuid().ToString() + "-" + request.Image.FileName;
                 var fullPath = Path.Combine(pathToSave, nameOfPostPicture);
